@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html>
+<!--j.rey mad. ene 2013-->
+
+<head>
+
+
+  <!--Theme roller-->
+  <link   href="jquery-ui-1.9.2.custom/css/custom-theme/jquery-ui-1.9.2.custom.css" rel="stylesheet">
+	<script src="jquery-ui-1.9.2.custom/js/jquery-1.8.3.js"></script>
+	<script src="jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.js"></script>
+	<!--jQeury-webFOCUS-->
+	<script src="jquery-webFOCUS.1.1.js"></script>
+
+	<!--higlighter-->
+	<script type="text/javascript" src="SyntaxHighlighter-master/scripts/XRegExp.js"></script> <!-- XRegExp is bundled with the final shCore.js during build -->
+	<script type="text/javascript" src="SyntaxHighlighter-master/scripts/shCore.js"></script>
+	<script type="text/javascript" src="SyntaxHighlighter-master/scripts/shBrushJScript.js"></script>
+	<link type="text/css" rel="stylesheet" href="SyntaxHighlighter-master/styles/shCore.css"/>
+	<link type="text/css" rel="Stylesheet" href="SyntaxHighlighter-master/styles/shThemeDefault.css" />
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+</head>
+
+<!--Theme styles-->
+<style>
+	body{
+		font: 62.5% "Trebuchet MS", sans-serif;
+		margin: 50px;
+	}
+	.demoHeaders {
+		margin-top: 2em;
+	}
+	#dialog-link {
+		padding: .4em 1em .4em 20px;
+		text-decoration: none;
+		position: relative;
+	}
+	#dialog-link span.ui-icon {
+		margin: 0 5px 0 0;
+		position: absolute;
+		left: .2em;
+		top: 50%;
+		margin-top: -8px;
+	}
+	#icons {
+		margin: 0;
+		padding: 0;
+	}
+	#icons li {
+		margin: 2px;
+		position: relative;
+		padding: 4px 0;
+		cursor: pointer;
+		float: left;
+		list-style: none;
+	}
+	#icons span.ui-icon {
+		float: left;
+		margin: 0 4px;
+	}
+
+	#tabs-1, #tabs-2, #tabs-3 {
+    /*height:100%;*/
+    overflow-y:auto;
+  }
+
+	.oddRow{
+  	border: 1px solid silver;
+  	font-weight: bolder;
+  	background: lightgrey;
+  }
+  .evenRow{
+  	border: 1px solid silver;
+  	font-weight: bolder;
+  	background: deepskyblue;
+  }
+
+	</style>
+
+<script>
+
+$(document).ready(function(){
+
+		$( "#tabs" ).tabs();
+
+	  //$('#divInforme').wfGenerateFile("D:\\", "csvFromReport", "csv", ";", "0");
+    //$.wfGenerateTemplate();
+    //$.wfGenerateMaster();
+/*
+		$('#divInforme').wfZebraStripes('#cccccc', 'grey');
+		$('#divInforme').wfHeaderColors('#0033CC', 'white');
+		$('#divInforme').wfHeaderBolder();
+		$('#divInforme').wfReportBorder('0', 'blue');
+		$('#divInforme').wfHeaderFixed('on');
+
+		$('#divInforme').draggable();
+
+		var fila = $('#divInforme').wfGetRow(1);
+		fila[0] = parseInt(fila[0]);
+
+		for(var i=0; i<fila.length; i++){
+
+			// alert(fila[i])
+
+		}
+
+		var campos = ["CAMPO1","CAMPO2","CAMPO3", "CAMPO4"];
+
+		//$.wfMaintainInclude("TGIGCSMT", campos, fila);
+
+		var celda = $('#divInforme').wfGetCell(1, 1);
+
+		$('#divInforme').wfReportBorder("0");
+		$('#divInforme').wfReportBorderColor("silver");
+		$('#divInforme').wfReportPadding("0");
+		$('#divInforme').wfReportCellSpacing("0");
+    $('#divInforme').wfHeaderAlign("center");
+    $('#divInforme').wfColumnAlign("1","center");
+    $('#divInforme').wfColumnAlign("2","left");
+    $('#divInforme').wfColumnAlign("4","right");
+*/
+
+
+$('a[href="#tabs-1"], a[href="#tabs-3"]').click( function(){
+	$('#divInforme').show();
+});
+
+$('a[href="#tabs-2"]').click( function(){
+	$('#divInforme').hide();
+});
+
+$('#valida1').keypress(function(event){ $.wfOnlyTheseChars(event, "a-zA-Z0-9 ") });
+$('#valida2').keypress(function(event){ $.wfNotTheseChars(event, "a-zA-Z0-9 ") });
+
+});// fin ready
+
+
+
+</script>
+
+<!--mis estilos-->
+<style>
+
+.fleft{float:left}
+.fright{float:right}
+.clear{clear:both}
+.margintop{margintop:1em;}
+
+#divInforme{
+  text-align:center;
+	margin: 2em auto;
+	text-align: left;
+}
+
+#tabs h5{
+	font-weight: bolder;
+	border-bottom: 1px solid black;
+}
+
+#tabs hr{
+	border: 1px dashed #B8EAFF;
+}
+
+#tabs p{
+	margin-left: 1em;
+}
+
+#tabs-1, #tabs-3{
+	height: 390px;
+}
+
+</style>
+
+<body>
+
+<div class="cabecera">
+	<h2>DOCUMENTACIÓN jQuery-webFOCUS - Plugin</h2>
+</div>
+
+<!--
+<div class="mHorizontal">
+	<ul>
+	  <li><a href="#exp">Expresiones regulares</a></li>
+	  <li><a href="#css">Estilos css</a></li>
+	  <li><a href="#fil">Generación de ficheros</a></li>
+	</ul>
+</div>
+-->
+
+<!-- Tabs -->
+<div id="tabs">
+	<ul>
+		<li><a href="#tabs-1">Selectores jQuery y estilos css</a></li>
+		<li><a href="#tabs-2">Funciones y expresiones</a></li>
+		<li><a href="#tabs-3">Generación de ficheros</a></li>
+	</ul>
+	<!--estilos-->
+	<div id="tabs-1">
+
+		<!--párrafo-->
+		<h2>Información general</h2>
+		<p>
+			Estas funciones utilizan el DOM de la página para generar estilos css de un informe FOCUS.
+			Sólo hay que tener en cuenta dos cosas:
+			<p>
+			<b>- El informe debe de guardarse en un HOLD FORMAT HTMLTABLE.</b>
+			</p>
+			<p>
+			<b>- El informe debe estar contenido en un div id="divInforme". (El nombre y el atributo es modificable).</b>
+			</p>
+		</p>
+		<p>
+		<i>Source:</i>
+		<pre class="brush:js:nocontrols">
+		 /* Código FOCUS */
+
+		 TABLE FILE TABLA
+		 PRINT *
+		 ON TABLE HOLD AS HNAME FORMAT HTMTABLE
+		 END
+		 -RUN
+
+		 /* Código HTML */
+
+		 <div id="divInforme">
+		 	!IBI.FIL.HNAME;
+		 </div>
+		</pre>
+		</p>
+
+		<hr/>
+		<!--fin párrafo-->
+    <i>*Por motivos de extensión, mostramos solo algunas de las funciones mas relevantes. El plugin contiene más funciones.</i>
+    <hr/>
+
+<!-- -- Comienzo funciones -- -->
+
+    <!--párrafo-->
+		<h3>$('#divInforme').wfTdZebraClass(classOdd, classEven)</h3>
+		<p>
+			Esta función utiliza como selector el id="divInfome".
+			Así de la siguiente manera, el informe contenido en #divInforme se cebreará con las clases que definamos y
+			pasemos como parametros.
+			<p>
+			- "classOdd": serán las filas impares.(La clase se añadira a cada celda).
+			</p>
+			<p>
+			- "classEven": serán las filas pares.(La clase se añadira a cada celda).
+			</p>
+		</p>
+
+		<p>
+			<input type="button" value="Pruébalo" onclick=" $('#divInforme').wfTdZebraClass('oddRow', 'evenRow');">
+		</p>
+
+		<p>
+		<i>Source:</i>
+		<pre class="brush:js:nocontrols">
+		
+		  /* Clases CSS */
+		  .oddRow{
+		  	border: 1px solid silver;
+		  	font-weight: bolder;
+		  	background: lightgrey;
+		  }
+		  .evenRow{
+		  	border: 1px solid silver;
+		  	font-weight: bolder;
+		  	background: deepskyblue;
+		  }
+
+		  /* HTML */
+			<input type="button" value="Pruébalo" onclick=" $('#divInforme').wfTdZebraClass('oddRow', 'evenRow');">
+		</pre>
+		</p>
+
+		<hr/>
+		<!--fin párrafo-->
+		
+		 <!--párrafo-->
+		<h3>$('#divInforme').wfTrZebraClass(classOdd, classEven)</h3>
+		<p>
+			Esta función utiliza como selector el id="divInfome".
+			Así de la siguiente manera, el informe contenido en #divInforme se cebreará con las clases que definamos y
+			pasemos como parametros.
+			<p>
+			- "classOdd": serán las filas impares.(La clase se añadira a cada fila).
+			</p>
+			<p>
+			- "classEven": serán las filas pares.(La clase se añadira a cada fila).
+			</p>
+		</p>
+
+		<p>
+			<input type="button" value="Pruébalo" onclick=" $('#divInforme').wfTrZebraClass('oddRow', 'evenRow');">
+		</p>
+
+		<p>
+		<i>Source:</i>
+		<pre class="brush:js:nocontrols">
+		  /* Clases CSS */
+		  .oddRow{
+		  	border: 1px solid silver;
+		  	font-weight: bolder;
+		  	background: lightgrey;
+		  }
+		  .evenRow{
+		  	border: 1px solid silver;
+		  	font-weight: bolder;
+		  	background: deepskyblue;
+		  }
+
+		  /* HTML */
+			<input type="button" value="Pruébalo" onclick=" $('#divInforme').wfTrZebraClass('oddRow', 'evenRow');">
+		</pre>
+		</p>
+
+		<hr/>
+		<!--fin párrafo-->
+		
+		 <!--párrafo-->
+		<h3>$('#divInforme').wfRemoveZebraClass()</h3>
+		<p>
+			Esta función utiliza como selector el id="divInfome".
+			Así de la siguiente manera, el informe contenido en #divInforme se cebreará con las clases que definamos y
+			pasemos como parametros.
+			<p>
+			- No se pasan parámetros. La función quitará todas la clases que haya en cada tr y td del informe, a excepcion de las cabeceras de columna.
+			</p>
+			
+		</p>
+
+		<p>
+			<input type="button" value="Pruébalo" onclick=" $('#divInforme').wfRemoveZebraClass();">
+		</p>
+
+		<p>
+		<i>Source:</i>
+		<pre class="brush:js:nocontrols">
+		  /* Clases CSS */
+		  .oddRow{
+		  	border: 1px solid silver;
+		  	font-weight: bolder;
+		  	background: lightgrey;
+		  }
+		  .evenRow{
+		  	border: 1px solid silver;
+		  	font-weight: bolder;
+		  	background: deepskyblue;
+		  }
+
+		  /* HTML */
+			<input type="button" value="Pruébalo" onclick=" $('#divInforme').wfRemoveZebraClass();">
+		</pre>
+		</p>
+
+		<hr/>
+		<!--fin párrafo-->
+
+		<!--párrafo-->
+		<h3>$('#divInforme').wfZebraStripes(odd, even)</h3>
+		<p>
+			Esta función utiliza como selector el id="divInfome".
+			Así de la siguiente manera, el informe contenido en #divInforme se cebreará con los colores que le
+			pasemos como parametros. Podemos pasar los colores con nombres aceptados: "red", "green", etc o con valor hexadecimal: "#cccccc", "#B8EAFF", etc.
+			<p>
+			- "odd": serán las filas impares.
+			</p>
+			<p>
+			- "even": serán las filas pares.
+			</p>
+			<p>
+			- Si no se pasan parámetros, hará un cebreado por defecto: blanco y gris claro;
+			</p>
+		</p>
+
+		<p>
+			P.ej: color impares: <input type="text" size="8" id="odd" value="lightblue"> color pares:<input type="text" id="even" size="8" value="lightgrey">
+			<input type="button" value="Pruébalo" onclick=" $('#divInforme').wfZebraStripes( $('#odd').val(), $('#even').val() )">
+		</p>
+
+		<p>
+		<i>Source:</i>
+		<pre class="brush:js:nocontrols">
+		  /* Ejemplo */
+
+		 	color impares: <input type="text" size="6" id="odd" value="lightblue"> color pares:<input type="text" id="even" size="6" value="lightgrey">
+			<input type="button" value="Pruébalo" onclick=" $('#divInforme').wfZebraStripes( $('#odd').val(), $('#even').val() )">
+		</pre>
+		</p>
+
+		<hr/>
+		<!--fin párrafo-->
+
+		<!--párrafo-->
+		<h3>$('#divInforme').wfZebraStripesHeaders(odd, even)</h3>
+		<p>
+		  Esta función es la misma que la anterior pero empieza a cebrear desde las cabeceras de columna.
+			Utiliza como selector el id="divInfome".
+			Así de la siguiente manera, el informe contenido en #divInforme se cebreará con los colores que le
+			pasemos como parametros. Podemos pasar los colores con nombres aceptados: "red", "green", etc o con valor hexadecimal: "#cccccc", "#B8EAFF", etc.
+			<p>
+			- "odd": serán las filas impares.
+			</p>
+			<p>
+			- "even": serán las filas pares.
+			</p>
+		</p>
+
+		<p>
+			P.ej: color impares: <input type="text" size="8" id="odd" value="lightblue"> color pares:<input type="text" id="even" size="8" value="lightgrey">
+			<input type="button" value="Pruébalo" onclick=" $('#divInforme').wfZebraStripesHeaders( $('#odd').val(), $('#even').val() )">
+		</p>
+
+		<p>
+		<i>Source:</i>
+		<pre class="brush:js:nocontrols">
+		  /* Ejemplo */
+
+		 	color impares: <input type="text" size="6" id="odd" value="lightblue"> color pares:<input type="text" id="even" size="6" value="lightgrey">
+			<input type="button" value="Pruébalo" onclick=" $('#divInforme').wfZebraStripes( $('#odd').val(), $('#even').val() )">
+		</pre>
+		</p>
+
+		<hr/>
+		<!--fin párrafo-->
+
+		<!--párrafo-->
+		<h3>$('#divInforme').wfHeaderColors(backgr, color)</h3>
+		<p>
+		  Funcíon similar a las anteriores, pero en este caso customizamos las cabeceras de las columnas.
+			Utiliza como selector el id="divInfome".
+			<p>
+			- El primer parámetro es el color de fondo.
+			</p>
+			<p>
+			- El segundo parámetro es el color de fuente.
+			</p>
+		</p>
+
+		<p>
+			P.ej: color fondo: <input type="text" size="8" id="back" value="darkblue"> color fuente:<input type="text" id="font" size="8" value="white">
+			<input type="button" value="Pruébalo" onclick=" $('#divInforme').wfHeaderColors( $('#back').val(), $('#font').val() )">
+		</p>
+
+		<p>
+		<i>Source:</i>
+		<pre class="brush:js:nocontrols">
+		  /* Ejemplo */
+
+		 	color impares: <input type="text" size="6" id="odd" value="lightblue"> color pares:<input type="text" id="even" size="6" value="lightgrey">
+			<input type="button" value="Pruébalo" onclick=" $('#divInforme').wfZebraStripes( $('#back').val(), $('#font').val() )">
+		</pre>
+		</p>
+
+		<hr/>
+		<!--fin párrafo-->
+		
+		<!--párrafo-->
+		<h3>$('#divInforme').wfAddHeaderClass(class)</h3>
+		<p>
+		  Funcíon similar a las anteriores, pero en este caso customizamos las cabeceras de las columnas. con la clase que pasemos 
+		  como parámetro. Utiliza como selector el id="divInfome".
+		</p>
+
+		<p>
+			<input type="button" value="Pruébalo" onclick=" $('#divInforme').wfAddHeaderClass('ui-state-default')">
+		</p>
+
+		<p>
+		<i>Source:</i>
+		<pre class="brush:js:nocontrols">
+		  /* Ejemplo */
+			<input type="button" value="Pruébalo" onclick=" $('#divInforme').wfAddHeaderClass('ui-state-default')">
+		</pre>
+		</p>
+
+		<hr/>
+		<!--fin párrafo-->
+		
+		<!--párrafo-->
+		<h3>$('#divInforme').wfRemoveHeaderClass()</h3>
+		<p>
+		  Elimina la clase de las cabeceras de columnas.
+		  Utiliza como selector el id="divInfome".
+		</p>
+
+		<p>
+			<input type="button" value="Pruébalo" onclick=" $('#divInforme').wfRemoveHeaderClass()">
+		</p>
+
+		<p>
+		<i>Source:</i>
+		<pre class="brush:js:nocontrols">
+		  /* Ejemplo */
+			<input type="button" value="Pruébalo" onclick=" $('#divInforme').wfRemoveHeaderClass()">
+		</pre>
+		</p>
+
+		<hr/>
+		<!--fin párrafo-->
+
+<!--otras funciones-->
+
+		<!--párrafo-->
+		<h3>$('#divInforme').wfReportBorder(num)</h3>	
+		<p>
+		  - Cambia el valor del atributo <i>border</i> de la tabla del informe.
+		</p>
+		<i>Source:</i>
+		<pre class="brush:js:nocontrols">
+		  /* Ejemplo */
+		  
+			$('#divInforme').wfReportBorder("0");
+		</pre>
+		<p>
+			<input type="button" value="Pruébalo" onclick=" $('#divInforme').wfReportBorder('0');">
+		</p>
+		<hr/>
+		<!--fin párrafo-->
+		<!--párrafo-->
+		<h3>$('#divInforme').wfReportBorderColor(valor)</h3>	
+		<p>
+		  - Cambia el valor del atributo CSS <i>border</i> de la tabla del informe.
+		</p>
+		<i>Source:</i>
+		<pre class="brush:js:nocontrols">
+		  /* Ejemplo */
+		  
+			$('#divInforme').wfReportBorderColor("1px solid lightgrey");
+		</pre>
+		<p>
+			<input type="button" value="Pruébalo" onclick=" $('#divInforme').wfReportBorderColor('1px solid lightgrey');">
+		</p>
+		<hr/>
+		<!--fin párrafo-->
+		<!--párrafo-->
+		<h3>$('#divInforme').wfReportPadding(num)</h3>	
+		<p>
+		  - Cambia el valor del atributo  <i>padding</i> de la tabla del informe.
+		</p>
+		<i>Source:</i>
+		<pre class="brush:js:nocontrols">
+		  /* Ejemplo */
+		  
+			$('#divInforme').wfReportPadding("1");
+		</pre>
+		<p>
+			<input type="button" value="Pruébalo" onclick=" $('#divInforme').wfReportPadding('1')">
+		</p>
+		<hr/>
+		<!--fin párrafo-->
+		<!--párrafo-->
+		<h3>$('#divInforme').wfReportCellSpacing(num)</h3>	
+		<p>
+		  - Cambia el valor del atributo  <i>cellspacing</i> de la tabla del informe.
+		</p>
+		<i>Source:</i>
+		<pre class="brush:js:nocontrols">
+		  /* Ejemplo */
+		  
+			$('#divInforme').wfReportCellSpacing("0");
+		</pre>
+		<p>
+			<input type="button" value="Pruébalo" onclick=" $('#divInforme').wfReportCellSpacing('0');">
+		</p>
+		<hr/>
+		<!--fin párrafo-->
+		<!--párrafo-->
+		<h3>$('#divInforme').wfHeaderAlign(align)</h3>	
+		<p>
+		  - Cambia el valor del atributo  <i>align</i> de las cabeceras de columna. ("left", "center", "right").
+		</p>
+		<i>Source:</i>
+		<pre class="brush:js:nocontrols">
+		  /* Ejemplo */
+		  
+			$('#divInforme').wfHeaderAlign("center");
+		</pre>
+		<p>
+			<input type="button" value="Pruébalo" onclick=" $('#divInforme').wfHeaderAlign('center');">
+		</p>
+		<hr/>
+		<!--fin párrafo-->
+		<!--párrafo-->
+		<h3>$('#divInforme').wfColumnAlign(column, align)</h3>	
+		<p>
+		  - Cambia el valor del atributo  <i>align</i> de las columna especificada. Las columna empiezan a contar desde el valor 1. ("left", "center", "right").
+		</p>
+		<i>Source:</i>
+		<pre class="brush:js:nocontrols">
+		  /* Ejemplo */
+		  
+			$('#divInforme').wfColumnAlign(1, "center");
+			$('#divInforme').wfColumnAlign(4, "right");
+		</pre>
+		<p>
+			<input type="button" value="Pruébalo" onclick=" $('#divInforme').wfColumnAlign(1, 'center');$('#divInforme').wfColumnAlign(4, 'right');">
+		</p>
+		<hr/>
+		<!--fin párrafo-->
+		
+		<!--párrafo-->
+		<h3>$('#divInforme').wfGetRow(row)</h3>	
+		<p>
+		  - Devuelve un array con los valores de la columna especificada. 
+		</p>
+		<i>Source:</i>
+		<pre class="brush:js:nocontrols">
+		  /* Ejemplo */
+		  
+			$('#divInforme').wfGetRow(1);
+			
+		</pre>
+		<p>
+			<input type="button" value="Pruébalo" onclick=" alert( $('#divInforme').wfGetRow(1) );">
+		</p>
+		<hr/>
+		<!--fin párrafo-->
+		
+		<!--párrafo-->
+		<h3>$('#divInforme').wfGetCell(row, column)</h3>	
+		<p>
+		  - Devuelve un array con los valores de la celda de la fila y columna especificada. 
+		</p>
+		<i>Source:</i>
+		<pre class="brush:js:nocontrols">
+		  /* Ejemplo */
+		  
+			$('#divInforme').wfGetCell(5, 2);
+			
+		</pre>
+		<p>
+			<input type="button" value="Pruébalo" onclick=" alert( $('#divInforme').wfGetCell(5, 2) );">
+		</p>
+		<hr/>
+		<!--fin párrafo-->
+		
+</div><!--fin estilos-->
+
+	<!--exp-->
+	<div id="tabs-2">
+
+	  <!--párrafo-->
+		<h3>$.wfSideChar(cadena, qchar, charAtSides, charWhen)</h3>
+		<p>
+			Esta función resulta útil si vamos a pasar parámetros a un procedimiento fex, ya que el tratamiento del caracter
+			<i>ampersand (&)</i> nos puede generar errores si no existe un espacio a cada lado de éste.La función
+			pone un caracter a cada lado de un caracter especificado en una cadena, Sólo si al lado NO tiene un caracter
+			especificado, por ejemplo un espacio. (Vale para cualquier caracter, que le pasemos como parametro).
+		</p>
+		<p>
+		  P.ej: Tenemos en el input <i>id="miInput"</i> la siguiente cadena: "Johnson&Johnson".
+		</p>
+		<p>
+		  <input id="miInput" type="text" value="Johnson&Johnson"/>
+		  <input type="button" value="Pruébalo" onclick="javacript:$('#miInput').val( $.wfSideChar( $('#miInput').val(), '&', ' ', ' ' ))"/>
+		</p>
+
+		<p>
+		<i>Source:</i>
+		<pre class="brush:js:nocontrols">
+		/* Llamada a la función: $.wfSideChar( cadena, charAbuscar, charAponer, cuandoEsteChar ) */
+
+		  	<input id="miInput" type="text" value="Johnson&Johnson"/>
+		  	<input type="button" value="Pruébalo" onclick="javacript:$('#miInput').val( $.wfSideChar( $('#miInput').val(), '&', ' ', ' ' ))"/>
+		</pre>
+		</p>
+
+		<hr/>
+		<!--fin párrafo-->
+
+		<!--párrafo-->
+		<h3>$.wfChars(cadena)</h3>
+		<p>
+		Esta función convierte caracteres conflictivos p.ej.(&,€,+,%,#,etc)con procedimientos fex, tranformándolos en su correspondiente
+		código ASCII. Útil para pasar url sin problemas de codificación.
+		</p>
+		<p>
+		  P.ej: Tenemos la variable tipo String: "ESPAÑA"
+		</p>
+
+		<p>
+		<i>Source:</i>
+		<pre class="brush:js:nocontrols">
+		  	var pais = "ESPAÑA";
+
+		  	var pais2 = $.wfChars(pais);
+
+		  	/* Ahora pais2 contiene la cadena 'ESPA%F1A' */
+
+		</pre>
+		</p>
+
+		<hr/>
+		<!--fin párrafo-->
+
+		<!--párrafo-->
+		<h3>$.wfOnlyTheseChars(event, expReg)</h3>
+		<p>
+			Función para usar en eventos del tipo <i>keyup, keypress</i>. Cancela el evento si la tecla
+			introducida <b>NO</b> se corresponde con las que pasamos como expresión regular.
+		</p>
+		<p>
+		  P.ej: Sólo queremos que permita introducir letras, números y espacios en un input id="valida1".
+		</p>
+		<p>
+		  $('#valida1').keypress(function(event){ <b>$.wfOnlyTheseChars(event, "a-zA-Z0-9 ")</b> });
+		</p>
+
+		<p>
+		  <input id="valida1" type="text" value="" />
+		  <i>Intenta introducir caracteres que no sean letras a-z, números o espacios.</i>
+		</p>
+
+		<p>
+		<i>Source:</i>
+		<pre class="brush:js:nocontrols">
+		  
+		  $(document).ready(function(){
+		  	
+		  	$('#valida1').keypress(function(event){ $.wfOnlyTheseChars(event, "a-zA-Z0-9 ") });
+		  
+		  });
+		  
+			<input id="valida1" type="text" value="" />
+		</pre>
+		</p>
+
+		<hr/>
+		<!--fin párrafo-->
+
+		<!--párrafo-->
+		<h3>$.wfNotTheseChars(event, expReg)</h3>
+		<p>
+			Función para usar en eventos del tipo <i>keyup, keypress</i>. Cancela el evento si la tecla
+			introducida <b>SI</b> se corresponde con las que pasamos como expresión regular.
+		</p>
+		<p>
+		  P.ej: Sólo queremos que permita introducir cualquier caracter a excepción de letras, números y espacios en un input id="valida2".
+		</p>
+		<p>
+		  $('#valida2').keypress(function(event){ <b>$.wfNotTheseChars(event, "a-zA-Z0-9 ")</b> });
+		</p>
+		<p>
+		  <input id="valida2" type="text" value="" />
+		  <i>Intenta introducir caracteres que sean letras a-z, números o espacios.</i>
+		</p>
+
+		<p>
+		<i>Source:</i>
+		<pre class="brush:js:nocontrols">
+		  
+		   $(document).ready(function(){
+		  	
+		  	$('#valida1').keypress(function(event){ $.wfNotTheseChars(event, "a-zA-Z0-9 ") });
+		  
+		  });
+		  
+			<input id="valida2" type="text" value="" />
+		</pre>
+		</p>
+		<hr/>
+		<!--fin párrafo-->
+
+	</div><!--fin exp-->
+
+	<!--generacion de ficheros-->
+	<div id="tabs-3">
+
+<!--párrafo-->
+		<h2>Información general</h2>
+		<p>
+			Estas funciones utilizan el DOM de la página para generar estilos css de un informe FOCUS.
+			Sólo hay que tener en cuenta dos cosas:
+			<p>
+			<b>- El informe debe de guardarse en un HOLD FORMAT HTMLTABLE.</b>
+			</p>
+			<p>
+			<b>- El informe debe estar contenido en un div id="divInforme". (El nombre y el atributo es modificable).</b>
+			</p>
+		</p>
+		<p>
+		<i>Source:</i>
+		<pre class="brush:js:nocontrols">
+		 /* Código FOCUS */
+
+		 TABLE FILE TABLA
+		 PRINT *
+		 ON TABLE HOLD AS HNAME FORMAT HTMTABLE
+		 END
+		 -RUN
+
+		 /* Código HTML */
+
+		 <div id="divInforme">
+		 	!IBI.FIL.HNAME;
+		 </div>
+		</pre>
+		</p>
+
+		<hr/>
+		<!--fin párrafo-->
+    <span style="color:darkred;font-style:italic;font-weight:bolder">*AVISO IMPORTANTE: La generación de ficheros utiliza ActiveXObjects para utilizar la libreria FileSystemObject, LO CUAL SÓLO ES SOPORTADO POR INTERNET EXPLORER.</span>
+    <hr/>
+
+<!-- -- Comienzo funciones -- -->
+<!--párrafo-->
+		<h3>$.wfGenerateMaster(nFields , nKeys, tName)</h3>
+		<p>
+			Esta función genera un fichero .mas (master de FOCUS). Lo genera en nuestro directorio en 'D:\\'.
+			<p>
+			- Se le pasan como parámetros en este orden: El número de campos, el número de claves, el nombre de la tabla (Se usará como nombre de fichero.). 
+			</p>
+			<p>
+			- Si no se le pasan parámetros, genera una master basica de cinco campos, una clave y nombre wfMaster.mas. 
+			</p>
+			<p>
+			- Se trata de una plantilla por lo que los nombres de campos y formatos de la master se tendrán que cumplimentar manualmente. 
+			</p>
+		</p>
+		<p>
+		<i>Source:</i>
+		<pre class="brush:js:nocontrols">
+		  /* Por ejemplo queremos una master de la tabla TABLAXXX de 10 campos, de los cuales 3 son clave.*/
+		  
+		  $.wfGenerateMaster(10, 3, 'TABLAXXX');
+		  
+		</pre>
+		</p>
+		<p>
+		  <input type="button" value="Genera master" onclick=" $.wfGenerateMaster(10, 3, 'TABLAXXX'); $('#ver').show();"/>
+		  <a id="ver" style="display:none" href="D:/" >Ver master generada</a>
+		</p>
+
+		<hr/>
+<!--fin párrafo-->
+
+<!--párrafo-->
+		<h3>$.wfGenerateTemplate(dir)</h3>
+		<p>
+			Esta función genera un fichero de texto con nombre 'webFOCUS-Template', con plantillas de los principales comandos de webFOCUS.
+			<p>
+			- Se le pasan cómo parametros: Directorio completo donde lo queremos.(Opcional).
+			</p>
+			<p>
+			- Si no se le pasan parámetros, lo generá en 'D:\\'
+			</p>
+			
+		</p>
+		<p>
+		<i>Source:</i>
+		<pre class="brush:js:nocontrols">
+		  /* Generar plantilla de comandos webFOCUS en directorio D:\\.*/
+		  
+		  $.wfGenerateTemplate();
+		  
+		</pre>
+		</p>
+		<p>
+		  <input type="button" value="Genera Plantilla" onclick=" $.wfGenerateTemplate();$('#ver2').show();"/>
+		  <a id="ver2" style="display:none" href="D:/" >Ver plantilla generada</a>
+		</p>
+
+		<hr/>
+<!--fin párrafo-->
+
+<!--párrafo-->
+		<h3>$('#divInforme').wfGenerateFile(dir, nameFile, format, separator, fromRow)</h3>
+		<p>
+			Esta función utiliza el el DOM de la página para generar un fichero con el formato que le pasemos 
+			como parámetro, ya sea CSV, XLS, TXT, etc, a partir de un informe que hayamos guardado en un HOLD FORMAT HTMTABLE
+			y contenido en un div con selector de jQuery. P.ej: div id="divInforme". 
+			<p>
+			- Se le pasan cómo parametros (Opcionales): Directorio completo donde lo queremos, nombre del fichero, separador que queremos utilizar y desde que fila del informe queremos que genere el fichero.
+			</p>
+			<p>
+			- Si no se le pasan parámetros, lo generá en 'D:\\', con nombre 'NewFile', formato 'CSV', separador ';' y desde la fila 0 (la cabecera de columnas).
+			</p>
+			
+		</p>
+		<p>
+		<i>Source:</i>
+		<pre class="brush:js:nocontrols">
+		  /* Generar csv de informe abajo mostrado con separador ';' desde fila 0 (con cabecera) */
+		  
+		  $('#divInforme').wfGenerateFile();
+		  
+		  /* Generar txt de informe abajo mostrado con separador ',' desde fila 1 (omite cabecera) */
+		  
+		  $('#divInforme').wfGenerateFile('D:\\', 'miCSV', 'xls', ';', '1');
+		 
+		  /* Generar txt de informe abajo por defecto */
+		  
+		  $('#divInforme').wfGenerateFile('D:\\', 'miTXT', 'txt', ';', '1');
+		  
+		</pre>
+		</p>
+		<p>
+		  <input type="button" value="Genera CSV" onclick=" $('#divInforme').wfGenerateFile(); $('#ver3').show();"/>
+		  <input type="button" value="Genera XLS" onclick=" $('#divInforme').wfGenerateFile('D:\\', 'miXLS', 'xls', ';', '1'); $('#ver3').show();"/>
+		  <input type="button" value="Genera TXT" onclick=" $('#divInforme').wfGenerateFile('D:\\', 'miTXT', 'txt', ';', '1'); $('#ver3').show();"/>
+		  <a id="ver3" style="display:none" href="D:/" >Ver archivos generados</a>
+		</p>
+
+		<hr/>
+<!--fin párrafo-->
+
+	</div><!--fin generacion de ficheros-->
+
+</div><!--fin tabs-->
+
+<div id="divInforme">
+<h3>Informe para pruebas</h3>
+			<!--!IBI.FIL.MIHOLD;-->
+			<!---TABLA DE EJEMPLO: esto es un hold FORMAT HTMTABLE -->
+			<table border cellpadding=1 align=center>
+			<tbody>
+				<tr>
+					<td valign=bottom>CACO_CAR</td>
+					<td valign=bottom>CADS_CAR</td>
+					<td valign=bottom>CAFH_MOD</td>
+					<td valign=bottom>CAUS_MOD</td>
+				</tr>
+				<tr>
+					<td>00007</td>
+					<td>HONDA</td>
+					<td>2013/01/14 09:27:40.242944</td>
+					<td>A703278</td>
+				</tr>
+				<tr>
+					<td>00001</td>
+					<td>FORD</td>
+					<td>2012/12/14 08:28:09.000000</td>
+					<td>CARGINI</td>
+				</tr>
+				<tr>
+					<td>00002</td>
+					<td>FERRARI</td>
+					<td>2012/12/14 08:28:09.000000</td>
+					<td>CARGINI</td>
+				</tr>
+				<tr>
+					<td>00003</td>
+					<td>KIA</td>
+					<td>2012/12/14 08:28:09.000000</td>
+					<td>CARGINI</td>
+				</tr>
+				<tr>
+					<td>00000</td>
+					<td>VOLVO</td>
+					<td>2012/12/14 08:28:09.000000</td>
+					<td>CARGINI</td>
+				</tr>
+				<tr>
+					<td>00004</td>
+					<td>OPEL</td>
+					<td>2012/12/14 08:28:09.000000</td>
+					<td>CARGINI</td>
+				</tr>
+				<tr>
+					<td>00005</td>
+					<td>NISSAN</td>
+					<td>2012/12/14 08:28:09.000000</td>
+					<td>CARGINI</td>
+				</tr>
+				<tr>
+					<td>00006</td>
+					<td>PORSCHE</td>
+					<td>2013/01/11 14:40:51.409606</td>
+					<td>A703278</td>
+				</tr>
+			</tbody>
+			</table>
+
+</div><!--fin divInforme-->
+
+</body>
+
+</html>
