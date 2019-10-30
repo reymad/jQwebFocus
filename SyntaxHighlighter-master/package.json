@@ -17,7 +17,7 @@
 		"uglify-js" : "1.x.x",
 		"less"      : "1.x.x",
 		"jake"      : "0.x.x",
-		"minimatch" : "0.x.x"
+		"minimatch" : "3.x.x"
 	}
 }
 
