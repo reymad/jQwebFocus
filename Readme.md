@@ -2,5 +2,5 @@
 
 JQuery plug-in for webFocus. 
 
-Playground at [https://reymad.github.io/jquery-for-webfocus/]
+Playground and documentation [here](https://reymad.github.io/jquery-for-webfocus/).
 
