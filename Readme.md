@@ -1,3 +1,6 @@
 # jQuery-webFOCUS
 
-JQuery extended helper functions for IB WebFocus by reymad
+JQuery plug-in for webFocus. 
+
+Playground at [https://reymad.github.io/jquery-for-webfocus/]
+
